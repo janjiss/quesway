@@ -1,0 +1,9 @@
+<% title "Labot jautājumu" %>
+<ul id="right_menu">
+  <li><%= link_to "Atpakaļ uz aptauju", survey_path(@survey), :class=> "back" %></li>
+</ul>
+<h3><%= @survey.name %></h3>
+
+<%= render 'form' %>
+
+<p><%=  %></p>

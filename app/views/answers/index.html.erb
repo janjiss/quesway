@@ -1,0 +1,35 @@
+<% title "Atbildes uz: " + @question.body  %>
+<ul id="right_menu">
+  <li><%= link_to "Atpakaļ uz jautājumiem", {:controller => "questions", :action => "index", :survey_id => @question.survey_id}, :class=> "back" %></li>
+</ul>
+<table id="answers_table">
+  <% if @answer_array %>
+  <tr>
+    <th>Atbildes variants</th>
+    <th>Atbilžu skaits</th>
+    <th>Procenti</th>
+    <th></th>
+  </tr>
+
+  <% for answer in @answer_array %>
+  <tr>
+    <td><%= answer[:choice] %></td>
+    <td><%= answer[:answer_count] %></td>
+    <td><div class="graph"><div class="inner_graph" style=" width:<%= answer[:percent].to_i.to_s  %>px"></div></div></td>
+    <td>(<%= answer[:percent] %>%)</td>
+  </tr>
+  <% end %>
+  <% else %>
+    <%= paginate @answers %>
+    <tr>
+      <th>Atbilde</th>
+      <th>Laiks</th>
+    </tr>
+    <% for answer in @answers %>
+      </tr>
+        <td><%= answer.answer %></td>
+        <td><%= answer.created_at.strftime("%T %F") %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

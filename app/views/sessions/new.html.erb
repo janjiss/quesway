@@ -1,0 +1,5 @@
+<% title "Ieiet sistēmā" %>
+<p>Lai pieteiktos sitēmā, ir nepieciešama Jūsu parole:</p>
+<% form_tag sessions_path do %>
+  Parole: <%= password_field_tag :password%> <%= submit_tag "Ieiet" %>
+<% end %>

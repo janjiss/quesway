@@ -1,0 +1,19 @@
+<%= form_for @question do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.text_field :survey_id,:value => @survey.id, :type => :hidden %>
+  </p>
+  <p>
+    <%= f.label :body, "Jautājums" %><br />
+    <%= f.text_field :body %>
+  </p>
+  <p>
+    <%= f.label :category, "Jatuājuma atbildes tips" %><br />
+    <%= f.select :category, answer_type_array %>
+  </p>
+  <p id="choices">
+    <%= f.label :choices, "Lūdzu atdaliet atbilžu variantus ar '|'" %><br />
+    <%= f.text_area :choices %>
+  </p>
+  <p><%= f.submit "Apstiprināt", :class => "question" %></p>
+<% end %>

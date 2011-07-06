@@ -1,0 +1,16 @@
+<%= form_for @answer, :url => {:action => "create",:survey_id => params[:survey_id]} do |f| %>
+  <%= f.error_messages %>
+  <%= f.text_field :question_id, :type => :hidden, :value => @question.id %>
+  <% if @question.category == "collection" %>
+    <%= f.label :answer, "Lūdzu izvēlaties savu atbilžu variantu" %><br />
+    <%= f.select :answer, choice_array_from_string(@question) %>
+  <% elsif @question.category == "number" %>
+    <%= f.label :answer, "Lūdzu ievadiet ciparu:" %><br />
+    <%= f.text_field :answer %>
+  <% else %>
+    <%= f.label :answer, "Lūdzu ievadiet savu atbildi:" %><br />
+    <%= f.text_field :answer %>
+  <% end %>
+
+<%= f.submit :value => "Atbildēt", :class => "answer" %>
+<% end %>

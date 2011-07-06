@@ -1,0 +1,11 @@
+one:
+  question_id: 1
+  predefined_question_answer_id: 1
+  num_answer: 1
+  str_answer: MyString
+
+two:
+  question_id: 1
+  predefined_question_answer_id: 1
+  num_answer: 1
+  str_answer: MyString

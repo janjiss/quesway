@@ -1,0 +1,20 @@
+<% title @survey.name %>
+<ul id="right_menu">
+  <li><%= link_to "Aptaujas rezultāti", {:controller => "questions", :action => "index", :survey_id => @survey.id}, :class=> "results" %></li>
+  <li><%= link_to "Pievienot jautājumu", {:controller => "questions", :action => "new", :survey_id => @survey.id}, :class=> "add" %></li>
+  <li><%= link_to "Labot vai publicēt aptauju", edit_survey_path(@survey), :class => "edit"%></li>
+  <li><%= link_to "Dzēst aptauju", @survey, :confirm => 'Vai tiešām vēlaties dzēst šo aptauju??', :method => :delete, :class=>"destroy" %></li>
+</ul>
+<div id="content_wrapper">
+<% if @survey.questions.count == 0 %>
+  <p>Jautājumu nav</p>
+<% else %>
+  <% for question in @survey.questions %>
+    <div class="element_wrapper">
+      <h3><%= question.body %></h3> 
+      <%= link_to"Labot jautājumu",{:controller => "questions", :action => "edit", :id => question.id, :survey_id => @survey.id}, :class=> "action_link" %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+

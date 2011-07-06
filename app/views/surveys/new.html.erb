@@ -1,0 +1,10 @@
+<% title "Izveidot jaunu aptauju" %>
+
+<%= form_for @survey do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name, "Aptaujas nosaukums" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p><%= f.submit "Izveidot aptauju" %></p>
+<% end %>

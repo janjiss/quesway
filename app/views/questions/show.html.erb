@@ -1,0 +1,20 @@
+<% title "Question" %>
+
+<p>
+  <strong>Survey:</strong>
+  <%= @question.survey_id %>
+</p>
+<p>
+  <strong>Body:</strong>
+  <%= @question.body %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @question.answer_type %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_question_path(@question) %> |
+  <%= link_to "Destroy", @question, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", questions_path %>
+</p>

@@ -1,0 +1,40 @@
+<% title "Aptaujas" %>
+<ul id="right_menu">
+<% if admin? %>
+  <li><%= link_to "Pievinot jaunu aptauju", new_survey_path, :class=> "add" %></li>
+<% else %>
+  <li>Lūdzu izvēlaties aptauju,kuru aizpildīt</li>
+<% end %>
+</ul>
+<div id="content_wrapper">
+<% if @surveys.count >= 1 %>
+  <% for survey in @surveys %>
+    <div class="element_wrapper">
+      <h3><%= survey.name %></h3>
+      <% if admin? %>
+        <div class="survey_admin_menu">
+          <span class="<%= published?(survey)[:class] %>"><%= published?(survey)[:title] %></span>
+          <%= link_to "Labot aptauju",  survey, :class => "action_link"  %>
+          <%= link_to(
+          "Skatīt rezultātus", 
+          {:controller => "questions", :action => "index", :survey_id => survey.id}, 
+          :class => "action_link"
+          )%>
+        </div>
+      <% else %>
+        <div class="survey_menu">
+          <p class="question_count">Jautājumu skaits: <%= survey.questions.count %></p>
+          <%= link_to(
+            "Aizpildīt aptauju",
+            {:controller => "answers", :action => "new", :survey_id => survey.id}, 
+            :class => "action_link"
+          )%>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <h3>Pagaidām neviena aptauja nav pievienota :(</h3>
+<% end %>
+</div>
+<%= paginate @surveys %>
