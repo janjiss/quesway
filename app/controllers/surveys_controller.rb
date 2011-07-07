@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SurveysController < ApplicationController
-  before_filter :authorize, :only => [:new, :show, :create, :edit, :update, :destroy]
+  before_filter :authorize, :except => [:index]
   def index
     if admin?
       @surveys = Survey.page(params[:page]).per(10)

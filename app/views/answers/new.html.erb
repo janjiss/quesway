@@ -1,7 +1,2 @@
 <% title @question.body %>
-<% if question_counter[:progress] == 0 %>
-  Pagaidām Jūs neesat atbildējuši uz nevienu jautājumu no šīs aptaujas
-<% else %>
-  Jūs esat atbildējuši uz <%= question_counter[:progress] %> jautājumu no <%= question_counter[:total] %>
-<% end %>
-<%= render 'form' %>
+  Jūs esat atbildējuši uz <%= question_counter[:progress] %> jautājumiem no <%= question_counter[:total] %><%= render 'form' %>

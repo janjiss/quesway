@@ -10,17 +10,17 @@
   <body>
     
     <div id="header_container">
-    <header>
-      <%= link_to image_tag("logo.png", :alt => "Quesway logo", :id => "logo"), root_url %>
-      <ul id="header_menu">
-        <% if admin? %>
-        <li><%= link_to "Aptaujas", surveys_path %></li>
-        <li><%= link_to "Iziet", logout_path %></li>
-        <% else %>
-        <li><%= link_to "Ieiet", login_path %></li>
-        <% end %>
-      </ul>
-    </header>
+      <header>
+        <%= link_to image_tag("logo.png", :alt => "Quesway logo", :id => "logo"), root_url %>
+        <ul id="header_menu">
+          <% if admin? %>
+            <li><%= link_to "Aptaujas", surveys_path %></li>
+            <li><%= link_to "Iziet", logout_path %></li>
+          <% else %>
+            <li><%= link_to "Ieiet", login_path %></li>
+          <% end %>
+        </ul>
+      </header>
     </div>
     
     <div id="container">

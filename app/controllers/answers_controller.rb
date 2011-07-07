@@ -17,7 +17,11 @@ class AnswersController < ApplicationController
       for choice in choices_array
         answer_count = Answer.where(:answer => choice, :question_id => @question.id).count
         percent = percent_coefficient*answer_count
-        @answer_array.push({:answer_count => answer_count.to_s, :choice=> choice, :percent => percent.to_i.to_s})
+        @answer_array.push({
+          :answer_count => answer_count.to_s,
+          :choice=> choice,
+          :percent => percent.to_i.to_s
+        })
       end    
     end
   end
@@ -35,7 +39,10 @@ class AnswersController < ApplicationController
     survey_id = params[:survey_id]
     @answer = Answer.new(params[:answer])
     #find this 
-    tracker = Tracker.where(:survey_id => survey_id, :respondent_id => current_respondent.id).last
+    tracker = Tracker.where(
+      :survey_id => survey_id, 
+      :respondent_id => current_respondent.id
+    ).last
     total_questions = tracker.survey.questions.count
     if @answer.save
       #set tracker.completed to torue if all questions ar answered
@@ -50,7 +57,10 @@ class AnswersController < ApplicationController
       redirect_to new_answer_path(:survey_id  => @answer.question.survey.id)
     else
       #If save fails, then initialize @question variable, so it is accessible
-      @question = Question.where(:survey_id => survey_id, :sequence => tracker.progress).last
+      @question = Question.where(
+        :survey_id => survey_id, 
+        :sequence => tracker.progress
+      ).last
       render :action => 'new', :survey_id => survey_id
     end
   end
@@ -58,7 +68,10 @@ class AnswersController < ApplicationController
   private
   def initialize_tracker
     if Tracker.where(:survey_id => params[:survey_id], :respondent_id => current_respondent.id).count < 1
-      tracker = Tracker.create(:survey_id => params[:survey_id], :respondent_id => current_respondent.id)
+      tracker = Tracker.create(
+        :survey_id => params[:survey_id],
+        :respondent_id => current_respondent.id
+      )
     end
   end
   def survey_completed?
@@ -67,7 +80,10 @@ class AnswersController < ApplicationController
     end
   end
   def question_counter
-    tracker = Tracker.where(:survey_id => params[:survey_id], :respondent_id => current_respondent.id).last
+    tracker = Tracker.where(
+      :survey_id => params[:survey_id],
+      :respondent_id => current_respondent.id
+    ).last
     return {
       :progress => tracker.progress-1, 
       :total => tracker.survey.questions.count, 

@@ -6,7 +6,12 @@
 <% for question in @questions %>
   <div class="element_wrapper">
     <h3><%= question.body %></h3>
-    <%= link_to "Atbildes", {:controller => "answers", :action => "index", :question_id => question.id}, :class => "action_link" %>
+    <%= link_to("Atbildes", 
+      {:controller => "answers", 
+      :action => "index", 
+      :question_id => question.id}, 
+      :class => "action_link"
+    )%>
   </div>
 <% end %>
 </div>
