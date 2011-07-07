@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
       @survey = Survey.find(params[:survey_id])
       @question = Question.new
     else
-      redirect_to surveys_url, :notice => "Lūdzu izvēlaties aptauju no saraksta"
+      redirect_to surveys_url, :notice => "Please chose survey from list"
     end
   end
 
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     #Adds questions number
     @question.sequence = @survey.questions.count+1
     if @question.save
-      redirect_to survey_path(@survey), :notice => "Jautājums tika sekmīgi pievienots"
+      redirect_to survey_path(@survey), :notice => "Question successfuly created"
     else
       render :action => 'new'
     end
@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
       @survey = Survey.find(params[:survey_id])
       @question = Question.find(params[:id])
     else
-      redirect_to surveys_url, :notice => "Lūdzu izvēlaties aptauju no saraksta"
+      redirect_to surveys_url, :notice => "Please chose survey from list"
     end
   end
 
@@ -59,7 +59,7 @@ class QuestionsController < ApplicationController
         :body => params[:question][:body],
         :choices => escape_choices(params[:question][:choices])
       )
-      redirect_to survey_path(@survey), :notice => "Jautājums sekmīgi labots"
+      redirect_to survey_path(@survey), :notice => "Question sucsessfuly updated"
     else
       render :action => 'edit'
     end
@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to questions_url, :notice => "Jautājums sekmīgi dzēsts"
+    redirect_to questions_url, :notice => "Question successfuly delated"
   end
   private
   #clears choices from spaces and removes them if length is not valid (1..25)
@@ -94,7 +94,7 @@ class QuestionsController < ApplicationController
     end
     @survey = Survey.find(survey_id)
     if @survey.published == true
-      redirect_to survey_path(@survey), :notice => "Atvainojamies, bet aptauja jau ir publicēta"
+      redirect_to survey_path(@survey), :notice => "Sorry, but survay is publsihed"
     end
   end
 end

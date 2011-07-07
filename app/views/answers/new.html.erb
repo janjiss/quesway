@@ -1,2 +1,3 @@
 <% title @question.body %>
-  Jūs esat atbildējuši uz <%= question_counter[:progress] %> jautājumiem no <%= question_counter[:total] %><%= render 'form' %>
+  You have answered <%= question_counter[:progress] %> of<%= question_counter[:total] %> questions
+  <%= render 'form' %>

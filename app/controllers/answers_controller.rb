@@ -76,7 +76,7 @@ class AnswersController < ApplicationController
   end
   def survey_completed?
     if Tracker.where(:survey_id => params[:survey_id], :respondent_id => current_respondent.id, :completed => true).count > 0
-      redirect_to root_url, :notice => "Aptauja ir aizpildīta, paldies"
+      redirect_to root_url, :notice => "Survey has ben completed, thanks!"
     end
   end
   def question_counter

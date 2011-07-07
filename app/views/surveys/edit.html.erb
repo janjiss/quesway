@@ -1,18 +1,18 @@
-<% title "Publicēt vai labot aptauju" %>
+<% title "Edit or publish survey" %>
 <ul id="right_menu">
-  <li><%= link_to "Atpakaļ uz aptauju", survey_path(@survey), :class=> "back" %></li>
+  <li><%= link_to "Back to survey", survey_path(@survey), :class=> "back" %></li>
 </ul>
 <%= form_for @survey do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name, "Aptaujas nosaukums" %><br />
+    <%= f.label :name, "Survey name" %><br />
     <%= f.text_field :name %>
   </p>
   <div class="warning">
-    <h3>Uzmanību</h3>
-    <p>Ja Jūs publicēsiet aptauju, tad Jūs nevarēsiet pievienot jautājumus vai tos labot!</p>
-    <%= f.label :published, "Atklikšķiniet šeit, ja vēlaties publicēt aptauju" %>
+    <h3>Warning</h3>
+    <p>If you will publish survey, you won't be able to edit questions!</p>
+    <%= f.label :published, "Click here, if you wish to publish survey" %>
     <%= f.check_box :published %>
   </div>
-  <p><%= f.submit "Apstiprināt" %></p>
+  <p><%= f.submit "Submit survey" %></p>
 <% end %>

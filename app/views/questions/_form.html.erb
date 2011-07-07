@@ -4,16 +4,16 @@
     <%= f.text_field :survey_id,:value => @survey.id, :type => :hidden %>
   </p>
   <p>
-    <%= f.label :body, "Jautājums" %><br />
+    <%= f.label :body, "Questions" %><br />
     <%= f.text_field :body %>
   </p>
   <p>
-    <%= f.label :category, "Jatuājuma atbildes tips" %><br />
+    <%= f.label :category, "Question type" %><br />
     <%= f.select :category, answer_type_array %>
   </p>
   <p id="choices">
-    <%= f.label :choices, "Lūdzu atdaliet atbilžu variantus ar '|'" %><br />
+    <%= f.label :choices, "Please seperate your answers with '|'" %><br />
     <%= f.text_area :choices %>
   </p>
-  <p><%= f.submit "Apstiprināt", :class => "question" %></p>
+  <p><%= f.submit "Submit question", :class => "question" %></p>
 <% end %>

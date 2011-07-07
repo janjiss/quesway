@@ -3,9 +3,3 @@
 
 en:
   hello: "Hello world"
-  views:
-    pagination: 
-      previous: "< Iepriekšējā"
-      next: "Nākošā >"
-      last: "Pēdējā >>"
-      first: "<< Pirmā"

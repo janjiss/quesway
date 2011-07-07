@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless admin?
-      flash[:error] = "Jums nav tiesību šeit piekļūt"
+      flash[:error] = "You do not have access to this area"
       redirect_to root_url
       false
     end

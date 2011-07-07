@@ -1,9 +1,9 @@
-<% title "Aptaujas" %>
+<% title "Surveys" %>
 <ul id="right_menu">
 <% if admin? %>
-  <li><%= link_to "Pievinot jaunu aptauju", new_survey_path, :class=> "add" %></li>
+  <li><%= link_to "Add new survey", new_survey_path, :class=> "add" %></li>
 <% else %>
-  <li>Lūdzu izvēlaties aptauju,kuru aizpildīt</li>
+  <li>Please choose survey, wich you would like to fill</li>
 <% end %>
 </ul>
 <div id="content_wrapper">
@@ -16,8 +16,8 @@
           <span class="<%= published?(survey)[:class] %>">
             <%= published?(survey)[:title] %>
           </span>
-          <%= link_to "Labot aptauju",  survey, :class => "action_link"  %>
-          <%= link_to("Skatīt rezultātus", 
+          <%= link_to "Edit survey",  survey, :class => "action_link"  %>
+          <%= link_to("See results", 
             {:controller => "questions",
             :action => "index",
             :survey_id => survey.id}, 
@@ -26,8 +26,8 @@
         </div>
       <% else %>
         <div class="survey_menu">
-          <p class="question_count">Jautājumu skaits: <%= survey.questions.count %></p>
-          <%=link_to("Aizpildīt aptauju",
+          <p class="question_count">Question count: <%= survey.questions.count %></p>
+          <%=link_to("Fill this survey",
             {:controller => "answers",
             :action => "new", 
             :survey_id => survey.id}, 
@@ -38,7 +38,7 @@
     </div>
   <% end %>
 <% else %>
-  <h3>Pagaidām neviena aptauja nav pievienota :(</h3>
+  <h3>No surveys have been added yet :(</h3>
 <% end %>
 </div>
 <%= paginate @surveys %>

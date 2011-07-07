@@ -6,12 +6,12 @@ class Survey < ActiveRecord::Base
   has_many :questions, :dependent => :destroy
   has_many :trackers, :dependent => :destroy
 
-  validates_presence_of :name, :message => "Nosaukums ir obligāts"
-  validates_length_of :name, :within => (5..50), :message => "Nosaukumam ir jābūt no 5 līdz 50 simboliem garam"
+  validates_presence_of :name
+  validates_length_of :name, :within => (5..50)
 
   def validate
     if published == true && questions.count < 1 
-      errors.add_to_base "Lūdzu pievienojiet vismaz vienu jautājumu, lai publicētu savu aptauju"
+      errors.add_to_base "Please add at least one question to survey before publishing"
     end
   end
   

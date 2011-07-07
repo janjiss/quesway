@@ -3,8 +3,8 @@ module ErrorMessagesHelper
   # Render error messages for the given objects. The :message and :header_message options are allowed.
   def error_messages_for(*objects)
     options = objects.extract_options!
-    options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Nepareizi ievadīti lauki")
-    options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Izlabojiet sekojošos laukus un turpiniet.")
+    options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Errors in fields")
+    options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Please correct thiese fields and continue")
     messages = objects.compact.map { |o| o.errors.full_messages }.flatten
     unless messages.empty?
       content_tag(:div, :class => "error_messages") do

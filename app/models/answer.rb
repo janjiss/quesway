@@ -5,9 +5,9 @@ class Answer < ActiveRecord::Base
   belongs_to :survey
   has_many :trackers
 
-  validates_presence_of :answer, :message => "Lūdzu aizpildiet atbildes lauku."
-  validates_numericality_of :answer, :if => :num_answer, :message => "Lūdzu ievadiet ciparu."
-  validates_length_of :answer,:minimum => 2, :if => :choices_answer,:message => "Lūdzu ievadiet vismaz divus atbilžu variantus"
+  validates_presence_of :answer
+  validates_numericality_of :answer, :if => :num_answer
+  validates_length_of :answer,:minimum => 2, :if => :choices_answer
 
 
   private

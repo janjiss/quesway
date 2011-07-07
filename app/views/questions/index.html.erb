@@ -1,12 +1,12 @@
-<% title "Atbildes aptaujai: " + @survey.name %>
+<% title "Answers for surey: " + @survey.name %>
 <ul id="right_menu">
-  <li><%= link_to "Atpakaļ uz aptauju", survey_path(@survey), :class=> "back" %></li>
+  <li><%= link_to "Back to survey", survey_path(@survey), :class=> "back" %></li>
 </ul>
 <div id="content_wrapper">
 <% for question in @questions %>
   <div class="element_wrapper">
     <h3><%= question.body %></h3>
-    <%= link_to("Atbildes", 
+    <%= link_to("Answers", 
       {:controller => "answers", 
       :action => "index", 
       :question_id => question.id}, 

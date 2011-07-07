@@ -2,15 +2,15 @@
   <%= f.error_messages %>
   <%= f.text_field :question_id, :type => :hidden, :value => @question.id %>
   <% if @question.category == "collection" %>
-    <%= f.label :answer, "Lūdzu izvēlaties savu atbilžu variantu" %><br />
+    <%= f.label :answer, "Please fill the answer" %><br />
     <%= f.select :answer, choice_array_from_string(@question) %>
   <% elsif @question.category == "number" %>
-    <%= f.label :answer, "Lūdzu ievadiet ciparu:" %><br />
+    <%= f.label :answer, "Please fill in number:" %><br />
     <%= f.text_field :answer %>
   <% else %>
-    <%= f.label :answer, "Lūdzu ievadiet savu atbildi:" %><br />
+    <%= f.label :answer, "Please choose your answer:" %><br />
     <%= f.text_field :answer %>
   <% end %>
 
-<%= f.submit :value => "Atbildēt", :class => "answer" %>
+<%= f.submit :value => "Answer", :class => "answer" %>
 <% end %>

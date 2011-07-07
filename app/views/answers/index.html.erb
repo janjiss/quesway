@@ -1,7 +1,7 @@
 <% title "Atbildes uz: " + @question.body  %>
 <ul id="right_menu">
   <li>
-  <%= link_to("Atpakaļ uz jautājumiem", 
+  <%= link_to("Back to questions", 
   {:controller => "questions", 
     :action => "index", 
     :survey_id => @question.survey_id}, 

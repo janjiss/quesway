@@ -14,10 +14,10 @@
         <%= link_to image_tag("logo.png", :alt => "Quesway logo", :id => "logo"), root_url %>
         <ul id="header_menu">
           <% if admin? %>
-            <li><%= link_to "Aptaujas", surveys_path %></li>
-            <li><%= link_to "Iziet", logout_path %></li>
+            <li><%= link_to "Surveys", surveys_path %></li>
+            <li><%= link_to "Log out", logout_path %></li>
           <% else %>
-            <li><%= link_to "Ieiet", login_path %></li>
+            <li><%= link_to "Log in", login_path %></li>
           <% end %>
         </ul>
       </header>
@@ -31,6 +31,6 @@
       <hr \>
       <%= yield %>
     </div>
-    <footer>Quesway, all rights reserved © Generic corporation</footer>
+    <footer>Quesway, all rights reserved © Janis Miezitis</footer>
   </body>
 </html>

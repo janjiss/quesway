@@ -1,6 +1,6 @@
 module ApplicationHelper
   def answer_type_array 
-    [["Skaitlis", "number"],["Teksts", "string"],["Varianti", "collection"]]
+    [["Number", "number"],["Text", "string"],["Multiple answers", "collection"]]
   end
 
   def choice_array_from_string(question)
