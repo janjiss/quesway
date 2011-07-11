@@ -3,7 +3,7 @@ class CreateTrackers < ActiveRecord::Migration
     create_table :trackers do |t|
       t.integer :survey_id
       t.integer :respondent_id
-      t.integer :progress, :default => 1
+      t.integer :progress, :default => 0
       t.boolean :completed, :default => false
       t.timestamps
     end

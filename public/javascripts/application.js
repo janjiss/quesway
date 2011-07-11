@@ -10,7 +10,7 @@ $(document).ready(function() {
 //Function hides or displayes question answer collection based on select. If slecet is collection,
 // it shows answers, else, they are hidden.
 function hide_or_show_choices(select) {
-  if ($(select).val() == "collection") {
+  if ($(select).val() == "choices") {
     $("#choices").show();
   } else {
     $("#choices").hide();

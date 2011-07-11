@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20110706115310) do
   create_table "trackers", :force => true do |t|
     t.integer  "survey_id"
     t.integer  "respondent_id"
-    t.integer  "progress",      :default => 1
+    t.integer  "progress",      :default => 0
     t.boolean  "completed",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"

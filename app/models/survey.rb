@@ -1,10 +1,10 @@
 # encoding: utf-8
 class Survey < ActiveRecord::Base
   attr_accessible :name, :published
-  has_many :answers, :through => :questions
-  has_many :trackers
-  has_many :questions, :dependent => :destroy
   has_many :trackers, :dependent => :destroy
+  has_many :answers, :through => :questions
+  has_many :questions, :dependent => :destroy
+
 
   validates_presence_of :name
   validates_length_of :name, :within => (5..50)

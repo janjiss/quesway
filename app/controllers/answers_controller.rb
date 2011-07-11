@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answers = Answer.page(params[:page]).where(:question_id => @question.id)
     #If questions have predefined answers, then count percentage
-    if @question.category == "collection"
+    if @question.choices_answer?
       @answer_array = []
       choices_array = @question.choices.split("|")
       percent_coefficient = 100.to_f/@answers.count
@@ -27,34 +27,29 @@ class AnswersController < ApplicationController
   end
 
   def new
-    survey_id = params[:survey_id]
-    #Find matching tracker (It is initialized with before filter)
-    tracker = Tracker.where(:survey_id => survey_id, :respondent_id => current_respondent.id).last
-    @survey = Survey.find(survey_id)
-    @question = Question.where(:survey_id => survey_id, :sequence => tracker.progress).last
-    @answer = Answer.new
+    if params[:survey_id]
+      survey_id = params[:survey_id]
+      #Find matching tracker (It is initialized with before filter)
+      tracker = Tracker.where(:survey_id => survey_id, :respondent_id => current_respondent.id).last
+      @survey = Survey.find(survey_id)
+      @question = Question.where(:survey_id => survey_id, :sequence => tracker.progress).last
+      @answer = Answer.new
+    else
+      redirect_to root_url, :notice => "Please select survey"
+    end
   end
 
   def create
     survey_id = params[:survey_id]
     @answer = Answer.new(params[:answer])
-    #find this 
+    #Find current tracker 
     tracker = Tracker.where(
       :survey_id => survey_id, 
       :respondent_id => current_respondent.id
     ).last
-    total_questions = tracker.survey.questions.count
     if @answer.save
-      #set tracker.completed to torue if all questions ar answered
-      if tracker.progress >= total_questions
-        tracker.completed = true
-      #else add progress to tracker
-      else
-        tracker.progress = tracker.progress+1
-      end
       tracker.save
-      #redirect_to next answer
-      redirect_to new_answer_path(:survey_id  => @answer.question.survey.id)
+      redirect_to new_answer_path(:survey_id  => survey_id)
     else
       #If save fails, then initialize @question variable, so it is accessible
       @question = Question.where(

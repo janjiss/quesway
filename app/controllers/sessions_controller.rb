@@ -1,9 +1,14 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
   def create
-    session[:password] = params[:password]
-    flash[:notice] = "Jūs esat sekmīgi ielogojušies"
-    redirect_to root_url
+    if params[:password] != ADMIN_PASSWORD
+      flash[:notice] = "Nepareiza parole"
+      redirect_to login_path
+    else
+      session[:password] = params[:password]
+      flash[:notice] = "Jūs esat sekmīgi ielogojušies"
+      redirect_to root_url
+    end
   end
 
   def destroy
