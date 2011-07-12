@@ -1,7 +1,6 @@
 # encoding: utf-8
 class Survey < ActiveRecord::Base
   attr_accessible :name, :published
-  has_many :trackers, :dependent => :destroy
   has_many :answers, :through => :questions
   has_many :questions, :dependent => :destroy
 
@@ -14,5 +13,7 @@ class Survey < ActiveRecord::Base
       errors.add_to_base "Please add at least one question to survey before publishing"
     end
   end
-  
+  def published?
+    published == true
+  end
 end

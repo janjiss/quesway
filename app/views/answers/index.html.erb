@@ -1,4 +1,4 @@
-<% title "Atbildes uz: " + @question.body  %>
+<% title "Answers to: " + @question.body  %>
 <ul id="right_menu">
   <li>
   <%= link_to("Back to questions", 
@@ -10,40 +10,16 @@
   %>
   </li>
 </ul>
-<table id="answers_table">
-
-  <% if @answer_array %>
-    <tr>
-      <th>Atbildes variants</th>
-      <th>Atbilžu skaits</th>
-      <th>Procenti</th>
-      <th></th>
+<table class="answers_table_dark">
+  <tr>
+    <th>Answer</th>
+    <th>Time</th>
+  </tr>
+  <% for answer in @answers %>
     </tr>
-    <% for answer in @answer_array %>
-    <tr>
-      <td><%= answer[:choice] %></td>
-      <td><%= answer[:answer_count] %></td>
-      <td>
-        <div class="graph">
-          <div class="inner_graph" style=" width:<%= answer[:percent].to_i.to_s  %>px">
-          </div>
-        </div>
-      </td>
-      <td>(<%= answer[:percent] %>%)</td>
+      <td><%= answer.answer %></td>
+      <td><%= answer.created_at.strftime("%T %F") %></td>
     </tr>
-  <% end %>
-
-  <% else %>
-    <%= paginate @answers %>
-    <tr>
-      <th>Atbilde</th>
-      <th>Laiks</th>
-    </tr>
-    <% for answer in @answers %>
-      </tr>
-        <td><%= answer.answer %></td>
-        <td><%= answer.created_at.strftime("%T %F") %></td>
-      </tr>
-    <% end %>
   <% end %>
 </table>
+<%= paginate @answers %>

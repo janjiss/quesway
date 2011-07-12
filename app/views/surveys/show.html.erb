@@ -38,6 +38,7 @@
   <% for question in @survey.questions %>
     <div class="element_wrapper">
       <h3><%= question.body %></h3> 
+      <% if !@survey.published? %>
       <%=link_to("Edit question",
         {:controller => "questions",
         :action => "edit",
@@ -45,6 +46,7 @@
         :survey_id => @survey.id},
         :class=> "action_link"
       )%>
+      <% end %>
     </div>
   <% end %>
 <% end %>

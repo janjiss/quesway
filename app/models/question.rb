@@ -12,12 +12,42 @@ class Question < ActiveRecord::Base
 
   before_save :remove_choices?
   before_save :escape_choices
+
+  # Return choice answers array
+  def choice_answers
+    if choices_answer?
+      answer_array = []
+      choices_array = choices.split("|")
+      percent_coefficient = 100.to_f/answers.count
+
+      #For each choice push answer count to @answer_array
+      for choice in choices_array
+        answer_count = Answer.where(:answer => choice, :question_id => id).count
+        percent = percent_coefficient*answer_count
+        answer_array.push({
+          :answer_count => answer_count.to_s,
+          :choice=> choice,
+          :percent => percent.to_i.to_s
+      })
+      end 
+      return answer_array
+    else
+      return false
+    end
+  end
+
+  def string_or_number_answers
+    answers.find(:all, :limit => 5, :order => 'created_at DESC')
+  end
+
   def choices_answer? 
     category == "choices"
   end
+
   def string_answer?
     category == "string"
   end
+
   def number_answer? 
     category == "number"
   end

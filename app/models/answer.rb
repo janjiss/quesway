@@ -9,7 +9,6 @@ class Answer < ActiveRecord::Base
   validates_numericality_of :answer, :if => :number_answer?
   validates_length_of :answer,:minimum => 2, :if => :choices_answer?
 
-
   private
   def choices_answer? 
     question.choices_answer?

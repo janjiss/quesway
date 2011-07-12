@@ -8,22 +8,6 @@ class AnswersController < ApplicationController
   def index
     @question = Question.find(params[:question_id])
     @answers = Answer.page(params[:page]).where(:question_id => @question.id)
-    #If questions have predefined answers, then count percentage
-    if @question.choices_answer?
-      @answer_array = []
-      choices_array = @question.choices.split("|")
-      percent_coefficient = 100.to_f/@answers.count
-      #For each choice push answer count to @answer_array
-      for choice in choices_array
-        answer_count = Answer.where(:answer => choice, :question_id => @question.id).count
-        percent = percent_coefficient*answer_count
-        @answer_array.push({
-          :answer_count => answer_count.to_s,
-          :choice=> choice,
-          :percent => percent.to_i.to_s
-        })
-      end    
-    end
   end
 
   def new
@@ -48,7 +32,7 @@ class AnswersController < ApplicationController
       #If save fails, then initialize @question variable, so it is accessible
       @question = Question.where(
         :survey_id => survey_id, 
-        :sequence => tracker.progress
+        :sequence => session[survey_id][:progress]
       ).last
       render :action => 'new', :survey_id => survey_id
     end

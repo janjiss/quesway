@@ -251,10 +251,20 @@ input[type="submit"].question {
   font-weight:bold;
   color:#fff;
 }
-#answers_table {
+.answers_table_light {
   text-align:center;
 }
-#answers_table td {
+.answers_table_light td {
   padding:3px;
-  background-color:#f3f3f3;
+  background-color:#f9f9f9;
+}
+.answers_table_dark {
+  text-align:center;
+}
+.answers_table_dark td {
+  padding:3px;
+  background-color:#f2f2f2;
+}
+.partial_answers li {
+  margin-left:15px;
 }

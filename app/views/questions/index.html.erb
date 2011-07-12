@@ -6,12 +6,43 @@
 <% for question in @questions %>
   <div class="element_wrapper">
     <h3><%= question.body %></h3>
-    <%= link_to("Answers", 
+    <% if question.choices_answer? %>
+      <table class="answers_table_light">
+        <tr>
+          <th>Answer</th>
+          <th>Answer count</th>
+          <th>Percent</th>
+          <th></th>
+        </tr>
+        <% for answer in question.choice_answers %>
+        <tr>
+          <td><%= answer[:choice] %></td>
+          <td><%= answer[:answer_count] %></td>
+          <td>
+            <div class="graph">
+              <div class="inner_graph" style=" width:<%= answer[:percent].to_i.to_s  %>px">
+              </div>
+            </div>
+          </td>
+          <td>(<%= answer[:percent] %>%)</td>
+        </tr>
+        <% end %>
+      </table>
+    <% else %>
+    <p>Latest answers:</p>
+      <% for answer in question.string_or_number_answers %>
+        <ul class="partial_answers">
+          <li><%= answer.answer %></li>
+        </ul>
+      <% end %>
+    <%= link_to("All answers", 
       {:controller => "answers", 
       :action => "index", 
       :question_id => question.id}, 
       :class => "action_link"
     )%>
+    <% end %>
+
   </div>
 <% end %>
 </div>
