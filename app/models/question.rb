@@ -20,7 +20,7 @@ class Question < ActiveRecord::Base
       choices_array = choices.split("|")
       percent_coefficient = 100.to_f/answers.count
 
-      #For each choice push answer count to @answer_array
+      #For each choice push answers to choices array
       for choice in choices_array
         answer_count = Answer.where(:answer => choice, :question_id => id).count
         percent = percent_coefficient*answer_count

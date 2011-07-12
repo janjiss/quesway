@@ -3,7 +3,6 @@ class Answer < ActiveRecord::Base
   attr_accessible :question_id, :answer
   belongs_to :question
   belongs_to :survey
-  has_many :trackers
 
   validates_presence_of :answer
   validates_numericality_of :answer, :if => :number_answer?
