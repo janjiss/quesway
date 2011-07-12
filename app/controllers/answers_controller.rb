@@ -1,7 +1,7 @@
 # encoding: utf-8
 class AnswersController < ApplicationController
-  before_filter :survey_completed?, :only => [:new, :create]
   before_filter :initialize_tracker, :only => [:new, :create]
+  before_filter :survey_completed?, :only => [:new, :create]
   before_filter :authorize, :only => [:index]
   helper_method :question_counter
 
@@ -28,11 +28,9 @@ class AnswersController < ApplicationController
 
   def new
     if params[:survey_id]
-      survey_id = params[:survey_id]
-      #Find matching tracker (It is initialized with before filter)
-      tracker = Tracker.where(:survey_id => survey_id, :respondent_id => current_respondent.id).last
+      survey_id = params[:survey_id].to_i
       @survey = Survey.find(survey_id)
-      @question = Question.where(:survey_id => survey_id, :sequence => tracker.progress).last
+      @question = Question.where(:survey_id => survey_id, :sequence => session[survey_id][:progress]).last
       @answer = Answer.new
     else
       redirect_to root_url, :notice => "Please select survey"
@@ -40,15 +38,11 @@ class AnswersController < ApplicationController
   end
 
   def create
-    survey_id = params[:survey_id]
+    survey_id = params[:survey_id].to_i
     @answer = Answer.new(params[:answer])
-    #Find current tracker 
-    tracker = Tracker.where(
-      :survey_id => survey_id, 
-      :respondent_id => current_respondent.id
-    ).last
     if @answer.save
-      tracker.save
+      #Add one step to progress
+      session[survey_id][:progress] += 1
       redirect_to new_answer_path(:survey_id  => survey_id)
     else
       #If save fails, then initialize @question variable, so it is accessible
@@ -62,27 +56,27 @@ class AnswersController < ApplicationController
 
   private
   def initialize_tracker
-    if Tracker.where(:survey_id => params[:survey_id], :respondent_id => current_respondent.id).count < 1
-      tracker = Tracker.create(
-        :survey_id => params[:survey_id],
-        :respondent_id => current_respondent.id
-      )
+    survey_id = params[:survey_id].to_i
+    if !session[survey_id]
+      session[survey_id] = {:progress => 1}
     end
   end
   def survey_completed?
-    if Tracker.where(:survey_id => params[:survey_id], :respondent_id => current_respondent.id, :completed => true).count > 0
-      redirect_to root_url, :notice => "Survey has ben completed, thanks!"
+    survey_id = params[:survey_id].to_i
+    question_count = Survey.find(survey_id).questions.count
+    # If progress is bigger than question count, then survey is completed
+    if session[survey_id][:progress] > question_count
+      redirect_to root_url, :notice => "Survey has been completed, thanks!" 
     end
   end
   def question_counter
-    tracker = Tracker.where(
-      :survey_id => params[:survey_id],
-      :respondent_id => current_respondent.id
-    ).last
+  survey_id = params[:survey_id].to_i
+  total = Survey.find(survey_id).questions.count.to_i
+  progress = session[survey_id][:progress]
     return {
-      :progress => tracker.progress-1, 
-      :total => tracker.survey.questions.count, 
-      :remaining => tracker.survey.questions.count-tracker.progress 
+      :progress => progress-1,
+      :total => total,
+      :remaining => total-progress 
     }
   end
 end
