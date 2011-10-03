@@ -20,7 +20,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(params[:survey])
     if @survey.save
-      redirect_to @survey, :notice => "Aptauja veiksmīgi pievienota"
+      redirect_to @survey, :notice => "The survey was successfully added"
     else
       render :action => 'new'
     end
@@ -33,7 +33,7 @@ class SurveysController < ApplicationController
   def update
     @survey = Survey.find(params[:id])
     if @survey.update_attributes(params[:survey])
-      redirect_to @survey, :notice  => "Aptauja veiksmīgi labota"
+      redirect_to @survey, :notice  => "The survey was successfully updated"
     else
       render :action => 'edit'
     end
@@ -42,6 +42,6 @@ class SurveysController < ApplicationController
   def destroy
     @survey = Survey.find(params[:id])
     @survey.destroy
-    redirect_to surveys_url, :notice => "Aptauja veiksmīgi dzēsta"
+    redirect_to surveys_url, :notice => "The survey was successfully deleted"
   end
 end
