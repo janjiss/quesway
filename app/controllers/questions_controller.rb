@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
     #Adds questions sequence based on question count
     @question.sequence = @survey.questions.count+1
     if @question.save
-      redirect_to survey_path(@survey), :notice => "Question successfuly created"
+      redirect_to survey_path(@survey), :notice => "Question successfully created"
     else
       render :action => 'new'
     end
@@ -48,7 +48,7 @@ class QuestionsController < ApplicationController
     @survey = Survey.find(params[:question][:survey_id])
 
     if @question.update_attributes(params[:question])
-      redirect_to survey_path(@survey), :notice => "Question sucsessfuly updated"
+      redirect_to survey_path(@survey), :notice => "Question successfully updated"
     else
       render :action => 'edit'
     end
@@ -61,6 +61,6 @@ class QuestionsController < ApplicationController
     survey_id ||= params[:question][:survey_id]
     @survey = Survey.find(survey_id)
     # Redirect to survey if it is published
-    redirect_to survey_path(@survey), :notice => "Sorry, but survey is publsihed" if @survey.published == true
+    redirect_to survey_path(@survey), :notice => "Sorry, but survey is published" if @survey.published == true
   end
 end

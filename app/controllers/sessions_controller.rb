@@ -2,18 +2,18 @@
 class SessionsController < ApplicationController
   def create
     if params[:password] != ADMIN_PASSWORD
-      flash[:notice] = "Nepareiza parole"
+      flash[:notice] = "incorrect password"
       redirect_to login_path
     else
       session[:password] = params[:password]
-      flash[:notice] = "Jūs esat sekmīgi ielogojušies"
+      flash[:notice] = "You have successfully logged in"
       redirect_to root_url
     end
   end
 
   def destroy
     reset_session
-    flash[:notice] = "Jūs esat sekmīgi izlogojušies"
+    flash[:notice] = "You have successfully logged out"
     redirect_to root_url
   end
 end

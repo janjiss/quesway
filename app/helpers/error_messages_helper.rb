@@ -4,7 +4,7 @@ module ErrorMessagesHelper
   def error_messages_for(*objects)
     options = objects.extract_options!
     options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Errors in fields")
-    options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Please correct thiese fields and continue")
+    options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Please correct these fields and continue")
     messages = objects.compact.map { |o| o.errors.full_messages }.flatten
     unless messages.empty?
       content_tag(:div, :class => "error_messages") do
