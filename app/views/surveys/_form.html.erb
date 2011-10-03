@@ -1,11 +1,11 @@
 <%= form_for @survey do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name, "Aptaujas nosaukums" %><br />
+    <%= f.label :name, "Survey Name" %><br />
     <%= f.text_field :name %>
   </p>
   <p class="warning">
-    <%= f.label :published, "Aptauja publicēta" %>
+    <%= f.label :published, "A survey published in" %>
     <%= f.check_box :published %>
   </p>
   <p><%= f.submit %></p>

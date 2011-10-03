@@ -10,7 +10,7 @@ class Survey < ActiveRecord::Base
 
   def validate
     if published == true && questions.count < 1 
-      errors.add_to_base "Please add at least one question to survey before publishing"
+      errors.add_to_base "Please add at least one question to the survey before publishing"
     end
   end
   def published?

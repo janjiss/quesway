@@ -1,4 +1,4 @@
-<% title "Edit or publish survey" %>
+<% title "Edit or publish the survey" %>
 <ul id="right_menu">
   <li><%= link_to "Back to survey", survey_path(@survey), :class=> "back" %></li>
 </ul>
@@ -10,8 +10,8 @@
   </p>
   <div class="warning">
     <h3>Warning</h3>
-    <p>If you will publish survey, you won't be able to edit questions!</p>
-    <%= f.label :published, "Click here, if you wish to publish survey" %>
+    <p>If you publish the survey, you won't be able to edit the questions!</p>
+    <%= f.label :published, "Click here, to publish the survey." %>
     <%= f.check_box :published %>
   </div>
   <p><%= f.submit "Submit survey" %></p>
